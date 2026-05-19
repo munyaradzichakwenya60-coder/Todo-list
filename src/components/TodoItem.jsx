@@ -20,17 +20,21 @@ function TodoItem({ todo, onToggleComplete }) {
   }
 
   useEffect(() => {
+    if (todo.completed) {
+      // If the task is completed, stop the timer
+      return;
+    }
+
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [todo.deadline]);
+  }, [todo.deadline, todo.completed]); // Re-run effect if completed status changes
 
   const { hours, minutes, seconds, overdue } = timeLeft;
 
   const getTimerColor = () => {
-    if (todo.completed) return '#9E9E9E'; // Gray for completed
     if (overdue) return '#F44336'; // Red for overdue
     return '#03A9F4'; // Energetic Sky Blue for active timer
   };
@@ -65,17 +69,31 @@ function TodoItem({ todo, onToggleComplete }) {
           (Deadline: {new Date(todo.deadline).toLocaleString()})
         </span>
       </div>
-      <div
-        style={{
-          fontWeight: 'bold',
-          color: getTimerColor(),
-          padding: '5px 10px',
-          borderRadius: '4px',
-          backgroundColor: '#f0f0f0', // Slight contrast
-        }}
-      >
-        {overdue ? 'OVERDUE' : `${hours}h ${minutes}m ${seconds}s`}
-      </div>
+      {todo.completed ? (
+        <div
+          style={{
+            fontWeight: 'bold',
+            color: '#1A237E', // Dark Blue text for badge
+            padding: '5px 10px',
+            borderRadius: '4px',
+            backgroundColor: '#BBDEFB', // Light Sky Blue background for badge
+          }}
+        >
+          Completed
+        </div>
+      ) : (
+        <div
+          style={{
+            fontWeight: 'bold',
+            color: getTimerColor(),
+            padding: '5px 10px',
+            borderRadius: '4px',
+            backgroundColor: '#f0f0f0', // Slight contrast
+          }}
+        >
+          {overdue ? 'OVERDUE' : `${hours}h ${minutes}m ${seconds}s`}
+        </div>
+      )}
     </div>
   );
 }
