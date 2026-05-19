@@ -41,7 +41,7 @@ function App() {
     >
       <h1
         style={{
-          color: '#333',
+          color: '#1A237E', // Dark Blue for main heading
           marginBottom: '20px',
           textAlign: 'center',
         }}

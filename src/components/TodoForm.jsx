@@ -27,7 +27,7 @@ function TodoForm({ onAddTask }) {
         flexDirection: 'column',
         gap: '10px',
         padding: '20px',
-        backgroundColor: '#4CAF50', // Flat solid color
+        backgroundColor: '#1A237E', // Deep Dark Blue for form container
         borderRadius: '8px',
         margin: '20px 0',
       }}
@@ -61,7 +61,7 @@ function TodoForm({ onAddTask }) {
         type="submit"
         style={{
           padding: '10px 15px',
-          backgroundColor: '#2196F3', // Flat solid color
+          backgroundColor: '#03A9F4', // Energetic Sky Blue for button
           color: 'white',
           border: 'none',
           borderRadius: '4px',

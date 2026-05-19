@@ -32,7 +32,7 @@ function TodoItem({ todo, onToggleComplete }) {
   const getTimerColor = () => {
     if (todo.completed) return '#9E9E9E'; // Gray for completed
     if (overdue) return '#F44336'; // Red for overdue
-    return '#2196F3'; // Blue for active
+    return '#03A9F4'; // Energetic Sky Blue for active timer
   };
 
   return (
@@ -57,7 +57,7 @@ function TodoItem({ todo, onToggleComplete }) {
           onChange={() => onToggleComplete(todo.id)}
           style={{
             transform: 'scale(1.5)',
-            accentColor: '#4CAF50', // Flat solid color
+            accentColor: '#03A9F4', // Energetic Sky Blue for checkbox accent
           }}
         />
         <span style={{ fontWeight: 'bold' }}>{todo.text}</span>

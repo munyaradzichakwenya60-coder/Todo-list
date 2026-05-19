@@ -11,7 +11,7 @@ function TodoList({ todos, onToggleComplete }) {
         minHeight: '100px',
       }}
     >
-      <h2 style={{ color: '#333', marginBottom: '15px' }}>Your Tasks</h2>
+      <h2 style={{ color: '#1A237E', marginBottom: '15px' }}>Your Tasks</h2> {/* Deep Dark Blue for heading */}
       {todos.length === 0 ? (
         <p style={{ color: '#666' }}>No tasks yet. Add one above!</p>
       ) : (
