@@ -33,10 +33,23 @@ function TodoItem({ todo, onToggleComplete }) {
   }, [todo.deadline, todo.completed]); // Re-run effect if completed status changes
 
   const { hours, minutes, seconds, overdue } = timeLeft;
+  const isOverdueAndUncompleted = overdue && !todo.completed;
 
   const getTimerColor = () => {
     if (overdue) return '#F44336'; // Red for overdue
     return '#03A9F4'; // Energetic Sky Blue for active timer
+  };
+
+  const getTaskTextColor = () => {
+    if (todo.completed) return '#616161'; // Darker gray for completed
+    if (isOverdueAndUncompleted) return '#9E9E9E'; // Muted gray for overdue and uncompleted
+    return '#333'; // Default dark text
+  };
+
+  const getTaskTextDecoration = () => {
+    if (todo.completed) return 'line-through';
+    if (isOverdueAndUncompleted) return 'line-through'; // Strikethrough for overdue and uncompleted
+    return 'none';
   };
 
   return (
@@ -50,8 +63,8 @@ function TodoItem({ todo, onToggleComplete }) {
         backgroundColor: todo.completed ? '#E0E0E0' : '#FFF', // Flat solid color
         border: '1px solid #ddd',
         borderRadius: '4px',
-        textDecoration: todo.completed ? 'line-through' : 'none',
-        color: '#333',
+        textDecoration: getTaskTextDecoration(),
+        color: getTaskTextColor(),
       }}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
@@ -59,9 +72,11 @@ function TodoItem({ todo, onToggleComplete }) {
           type="checkbox"
           checked={todo.completed}
           onChange={() => onToggleComplete(todo.id)}
+          disabled={isOverdueAndUncompleted} // Disable if overdue and not completed
           style={{
             transform: 'scale(1.5)',
-            accentColor: '#03A9F4', // Energetic Sky Blue for checkbox accent
+            accentColor: isOverdueAndUncompleted ? '#BDBDBD' : '#03A9F4', // Gray for disabled, Sky Blue otherwise
+            cursor: isOverdueAndUncompleted ? 'not-allowed' : 'pointer',
           }}
         />
         <span style={{ fontWeight: 'bold' }}>{todo.text}</span>
