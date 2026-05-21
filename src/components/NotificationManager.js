@@ -29,8 +29,8 @@ function NotificationManager({ todos, setTodos }) {
           if ('Notification' in window && Notification.permission === 'granted') {
             new Notification('Task Reminder', {
               body: message,
-              icon: '/vite.svg', // A generic icon
-            });
+              icon: '/clipboard.svg'
+           });
           } else {
             // Fallback to window.alert if notifications are not available or denied
             window.alert(message);
